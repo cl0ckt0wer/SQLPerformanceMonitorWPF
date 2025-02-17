@@ -1,12 +1,62 @@
 ﻿<Window x:Class="SQLPerformanceMonitorWPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SQLPerformanceMonitorWPF"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="SQL Performance Monitor" Height="520" Width="600">
+    <Grid Margin="10">
+        <StackPanel>
+            <!-- SQL Server Connection String Components -->
+            <Label Content="SQL Server Configuration:" FontWeight="Bold"/>
 
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <Label Content="Data Source:" Width="160"/>
+                <TextBox x:Name="DataSourceTextBox" Width="360" Text="YOUR_SERVER" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <Label Content="Initial Catalog:" Width="160"/>
+                <TextBox x:Name="InitialCatalogTextBox" Width="360" Text="YOUR_DATABASE" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <Label Content="Integrated Security:" Width="160"/>
+                <CheckBox x:Name="IntegratedSecurityCheckBox" IsChecked="True"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <Label Content="User ID:" Width="160"/>
+                <TextBox x:Name="UserIDTextBox" Width="360" IsEnabled="{Binding IsUserCredentialsEnabled}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <Label Content="Password:" Width="160"/>
+                <PasswordBox x:Name="PasswordBox" Width="360" IsEnabled="{Binding IsUserCredentialsEnabled}" />
+            </StackPanel>
+
+            <!-- Trust Server Certificate -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <Label Content="Trust Server Certificate:" Width="160"/>
+                <CheckBox x:Name="TrustServerCertificateCheckBox" IsChecked="True"/>
+            </StackPanel>
+
+            <!-- SQLite Database Path -->
+            <Label Content="SQLite Database Path:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <TextBox x:Name="SQLiteDatabasePathTextBox" Text="ExecutionPlanStats.db" />
+
+            <!-- Polling Interval -->
+            <Label Content="Polling Interval (Seconds):" FontWeight="Bold" Margin="0,10,0,0" />
+            <TextBox x:Name="PollingIntervalTextBox" Text="60" Width="100"/>
+
+            <!-- Enable Logging -->
+            <CheckBox x:Name="LoggingCheckBox" Content="Enable Logging" IsChecked="False" Margin="0,10,0,0"/>
+
+            <!-- Start/Stop Monitoring -->
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="StartButton" Content="Start Monitoring" Click="StartButton_Click" Width="120"/>
+                <Button x:Name="StopButton" Content="Stop Monitoring" Click="StopButton_Click" Width="120" Margin="10,0,0,0"/>
+            </StackPanel>
+
+            <!-- Output Display -->
+            <TextBox x:Name="OutputTextBox" Margin="0,10,0,0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Height="200"/>
+        </StackPanel>
     </Grid>
 </Window>
